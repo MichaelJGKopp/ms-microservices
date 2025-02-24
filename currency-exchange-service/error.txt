@@ -1,0 +1,10 @@
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException:
+
+Syntax error in SQL statement "create table currency_exchange (conversion_multiple numeric(38,2), id bigint not null, environment varchar(255),
+
+[*]from varchar(255), to varchar(255), primary key (id))";
+
+expected "identifier";
+
+SQL statement:
+create table currency_exchange (conversion_multiple numeric(38,2), id bigint not null, environment varchar(255), from varchar(255), to varchar(255), primary key (id)) [42001-232]
