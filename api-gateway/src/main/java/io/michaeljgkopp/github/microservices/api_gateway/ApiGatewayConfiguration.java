@@ -1,9 +1,6 @@
 package io.michaeljgkopp.github.microservices.api_gateway;
 
-import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.Buildable;
-import org.springframework.cloud.gateway.route.builder.PredicateSpec;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +25,8 @@ public class ApiGatewayConfiguration {
                         .uri("lb://currency-conversion"))
                 .route(p -> p.path("/currency-conversion-new/**")
                         .filters(f -> f.rewritePath(
-                                "/currency-conversion-new/(?<segment>.*)",
-                                "/currency-conversion-feign/${segment}"))
+                                "/currency-conversion-new/(?<segment>.*)",  // capture group
+                                "/currency-conversion-feign/${segment}"))   // insert capture
                         .uri("lb://currency-conversion"))
                 .build();
     }
