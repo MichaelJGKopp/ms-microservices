@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Executable;
+
 @RestController
 public class CircuitBreakerController {
 
@@ -15,7 +17,8 @@ public class CircuitBreakerController {
 
 
         @GetMapping("/sample-api")
-        @Retry(name="sample-api")  // name="default" returns error only after failing three times
+        @Retry(name="sample-api", fallbackMethod = "hardCodedResponse")
+        // name="default" returns error only after failing three times
         // define in application.properties: resilience4j.retry.instances.sample-api.max-attempts=5
         public String sampleApi() {
 
@@ -26,5 +29,9 @@ public class CircuitBreakerController {
                     "http://localhost:88/some-dummy-url", String.class);
 
             return responseEntity.getBody();
+        }
+
+        public String hardCodedResponse(Exception ex) {
+            return "Hard coded response";
         }
 }
