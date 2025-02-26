@@ -1,5 +1,6 @@
 package io.michaeljgkopp.github.microservices.currencyexchangeservice;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -17,15 +18,18 @@ public class CircuitBreakerController {
 
     // name="default" returns error only after failing three times else
     // define in application.properties: resilience4j.retry.instances.sample-api.max-attempts=5
-    // @Retry(name="sample-api", fallbackMethod = "hardCodedResponse")
+//    @Retry(name="sample-api", fallbackMethod = "hardCodedResponse")
 
     // the circuit breaker trips if failure percentage is higher than threshold
     // it then transitions from closed to open, then it fails fast until a recovery time when it becomes half-open
     // and finally closes again
-    // @CircuitBreaker(name="sample-api", fallbackMethod = "hardCodedResponse")
+//    @CircuitBreaker(name="sample-api", fallbackMethod = "hardCodedResponse")
 
     // not more than 10_000 calls per 10s to the sample-api
-    @RateLimiter(name="default")
+//    @RateLimiter(name="default")
+
+    // limit concurrent calls
+    @Bulkhead(name="default2")  // name is defined by us and mapped with application.properties values
 
     public String sampleApi() {
 
