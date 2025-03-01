@@ -2,7 +2,7 @@ eureka naming server:
 http://localhost:8761/
 
 currency conversion service using feign:
-http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+http://localhost:8101/currency-conversion-feign/from/USD/to/INR/quantity/10
 
 currency exchange service:
 http://localhost:8001/currency-exchange/from/USD/to/INR
